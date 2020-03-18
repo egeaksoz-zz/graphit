@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  backend:
+    build: ./backend
+    container_name: flask-backend
+    expose:
+      - 5000
+    ports:
+      - 5000:5000
+    volumes:
+      - ./backend:/usr/src/app
+    environment:
+      - FLASK_APP=__init__.py
+  frontend:
+    build: ./frontend
+    container_name: react-frontend
+    expose:
+      - 3000
+    ports:
+      - 3000:3000
+    volumes:
+      - ./frontend/src:/usr/src/app/src
+      - ./frontend/public:/usr/src/app/public
+    links:
+      - "backend:backend"
+  mongodb:
+    image: mongo:4.0.4
+    container_name: mongodb
+    ports:
+      - 27017:27017
+
