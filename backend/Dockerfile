@@ -9,5 +9,7 @@ COPY . .
 
 ENV FLASK_APP=__init__.py
 
+EXPOSE 5000
+
 ENTRYPOINT [ "flask" ]
 CMD [ "run", "--host=0.0.0.0" ]
